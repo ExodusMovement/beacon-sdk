@@ -4,7 +4,7 @@ import * as chai from 'chai'
 import * as chaiAsPromised from 'chai-as-promised'
 import * as nacl from "tweetnacl";
 import 'mocha'
-import { getAddressFromPublicKey, encryptCryptoboxPayload, decryptCryptoboxPayload, openCryptobox, sealCryptobox } from '../src/utils/crypto'
+import { getAddressFromPublicKey, encryptCryptoboxPayload, decryptCryptoboxPayload, openCryptobox, sealCryptobox, signMessage, getKeypairFromSeed } from '../src/utils/crypto'
 import { generateGUID } from '../src/utils/generate-uuid'
 
 // use chai-as-promised plugin
@@ -85,6 +85,15 @@ describe(`Crypto`, () => {
             'Decryption failed'
           )
         }
+      })
+    })
+    describe('signMessage', () => {
+      it(`regression test`, async () => {
+        const msg = 'message'
+	const seed = 'seed'
+	const keypair = await getKeypairFromSeed(seed)
+	const signature = await signMessage(msg, {secretKey: Buffer.from(keypair.secretKey)})
+	expect(signature).to.deep.equal('edsigtvCF3UNs6xYXhKQNC9nVVThqoJvWhEiYS3qPPf4VfZyuj32yXvQqdvf17M9tFf5uUCFfw4qnvpf5aZvgzcXY2SkdAs1ptt')
       })
     })
   })

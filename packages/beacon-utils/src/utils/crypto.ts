@@ -3,11 +3,9 @@ import * as nacl from "tweetnacl";
 import { randomBytes } from '@stablelib/random'
 import { encode } from '@stablelib/utf8'
 import { hash } from '@stablelib/blake2b'
-import { generateKeyPairFromSeed } from '@stablelib/ed25519'
-import { convertPublicKeyToX25519, convertSecretKeyToX25519, KeyPair } from '@stablelib/ed25519'
+import { convertPublicKeyToX25519, convertSecretKeyToX25519 } from '@stablelib/ed25519'
 import { BLAKE2b } from '@stablelib/blake2b'
 import { concat } from '@stablelib/bytes'
-import { sign } from '@stablelib/ed25519'
 
 export const secretbox_NONCEBYTES = 24 // crypto_secretbox_NONCEBYTES
 export const secretbox_MACBYTES = 16 // crypto_secretbox_MACBYTES
@@ -42,8 +40,8 @@ export async function getHexHash(key: string | Buffer | Uint8Array): Promise<str
  *
  * @param seed
  */
-export async function getKeypairFromSeed(seed: string): Promise<KeyPair> {
-  return generateKeyPairFromSeed(hash(encode(seed), 32))
+export async function getKeypairFromSeed(seed: string): Promise<nacl.SignKeyPair> {
+  return nacl.sign.keyPair.fromSeed(hash(encode(seed), 32))
 }
 
 /**
@@ -239,7 +237,7 @@ export const signMessage = async (
   const edsigPrefix: Uint8Array = new Uint8Array([9, 245, 205, 134, 18])
 
   const hash: Uint8Array = await coinlibhash(bufferMessage)
-  const rawSignature: Uint8Array = sign(keypair.secretKey, hash)
+  const rawSignature: Uint8Array = nacl.sign.detached(hash, keypair.secretKey)
   const signature: string = bs58check.encode(
     Buffer.concat([Buffer.from(edsigPrefix), Buffer.from(rawSignature)])
   )
