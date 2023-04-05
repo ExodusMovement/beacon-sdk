@@ -2,8 +2,9 @@
 
 import * as chai from 'chai'
 import * as chaiAsPromised from 'chai-as-promised'
+import * as nacl from "tweetnacl";
 import 'mocha'
-import { getAddressFromPublicKey } from '../src/utils/crypto'
+import { getAddressFromPublicKey, encryptCryptoboxPayload, decryptCryptoboxPayload, openCryptobox, sealCryptobox } from '../src/utils/crypto'
 import { generateGUID } from '../src/utils/generate-uuid'
 
 // use chai-as-promised plugin
@@ -36,6 +37,52 @@ describe(`Crypto`, () => {
         } catch (error) {
           expect((error as any).message).to.deep.equal(
             'invalid publicKey: edpkuxyLpwfawtWCazyBJQwpWtD9Ehs1KpnHzyNLyvtdPSf16DKA8Ax'
+          )
+        }
+      })
+    })
+    describe('encryptCryptoboxPayload / decryptCryptoboxPayload', () => {
+      it(`should encrypt and decrypt properly`, async () => {
+        const msg = 'message'
+	const key = new Uint8Array(32)
+	const encrypted = Buffer.from(await encryptCryptoboxPayload(msg, key), 'hex')
+	expect(await decryptCryptoboxPayload(encrypted, key)).to.deep.equal(msg)
+      })
+
+      it(`should throw an error when decoding an invalid payload`, async () => {
+        try {
+          const msg = 'message'
+	  const key = new Uint8Array(32)
+	  const encrypted = Buffer.from(await encryptCryptoboxPayload(msg, key), 'hex')
+	  encrypted[3] = 200  // corrupt the payload
+	  await decryptCryptoboxPayload(encrypted, key)
+          throw new Error('this should fail!')
+        } catch (error) {
+          expect((error as any).message).to.deep.equal(
+            'Decryption failed'
+          )
+        }
+      })
+    })
+    describe('sealCryptobox / openCryptobox', () => {
+      it(`should encrypt and decrypt properly`, async () => {
+        const msg = 'message'
+	const keypair = nacl.sign.keyPair()
+	const encrypted = Buffer.from(await sealCryptobox(msg, keypair.publicKey), 'hex')
+	expect(await openCryptobox(encrypted, keypair.publicKey, keypair.secretKey)).to.deep.equal(msg)
+      })
+
+      it(`should throw an error when decoding an invalid payload`, async () => {
+        try {
+	  const msg = 'message'
+	  const keypair = nacl.sign.keyPair()
+	  const encrypted = Buffer.from(await sealCryptobox(msg, keypair.publicKey), 'hex')
+	  encrypted[3] = 200  // corrupt the payload
+	  await openCryptobox(encrypted, keypair.publicKey, keypair.secretKey)
+          throw new Error('this should fail!')
+        } catch (error) {
+          expect((error as any).message).to.deep.equal(
+            'Decryption failed'
           )
         }
       })

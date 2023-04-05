@@ -1,5 +1,5 @@
 import * as bs58check from 'bs58check'
-import { box, generateKeyPair, openBox, openSecretBox, secretBox } from '@stablelib/nacl'
+import * as nacl from "tweetnacl";
 import { randomBytes } from '@stablelib/random'
 import { encode } from '@stablelib/utf8'
 import { hash } from '@stablelib/blake2b'
@@ -60,7 +60,7 @@ export async function encryptCryptoboxPayload(
 
   const combinedPayload = Buffer.concat([
     nonce,
-    Buffer.from(secretBox(sharedKey, nonce, Buffer.from(message, 'utf8')))
+    Buffer.from(nacl.secretbox(Buffer.from(message, 'utf8'), nonce, sharedKey))
   ])
 
   return toHex(combinedPayload)
@@ -79,7 +79,7 @@ export async function decryptCryptoboxPayload(
   const nonce = payload.slice(0, secretbox_NONCEBYTES)
   const ciphertext = payload.slice(secretbox_NONCEBYTES)
 
-  const openBox = openSecretBox(sharedKey, nonce, ciphertext)
+  const openBox = nacl.secretbox.open(ciphertext, nonce, sharedKey)
 
   if (!openBox) {
     throw new Error('Decryption failed')
@@ -100,14 +100,14 @@ export async function sealCryptobox(
 ): Promise<string> {
   const kxOtherPublicKey = convertPublicKeyToX25519(Buffer.from(otherPublicKey)) // Secret bytes to scalar bytes
 
-  const keypair = generateKeyPair()
+  const keypair = nacl.box.keyPair()
 
   const state = new BLAKE2b(24)
   const nonce = state.update(keypair.publicKey, 32).update(kxOtherPublicKey, 32).digest()
 
   const bytesPayload = typeof payload === 'string' ? encode(payload) : payload
 
-  const encryptedMessage = box(kxOtherPublicKey, keypair.secretKey, nonce, bytesPayload)
+  const encryptedMessage = nacl.box(bytesPayload, nonce, kxOtherPublicKey, keypair.secretKey)
 
   return toHex(concat(keypair.publicKey, encryptedMessage))
 }
@@ -136,7 +136,7 @@ export async function openCryptobox(
   const state = new BLAKE2b(24)
   const nonce = state.update(epk, 32).update(kxSelfPublicKey, 32).digest()
 
-  const decryptedMessage2 = openBox(epk, kxSelfPrivateKey, nonce, ciphertext)
+  const decryptedMessage2 = nacl.box.open(ciphertext, nonce, epk, kxSelfPrivateKey)
 
   if (!decryptedMessage2) {
     throw new Error('Decryption failed')
