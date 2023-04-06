@@ -1,4 +1,4 @@
-import { hash } from '@stablelib/blake2b'
+import { blake2b } from 'blakejs'
 import * as bs58check from 'bs58check'
 
 /**
@@ -9,7 +9,7 @@ import * as bs58check from 'bs58check'
  * @param publicKey
  */
 export const getSenderId = async (publicKey: string): Promise<string> => {
-  const buffer = Buffer.from(hash(Buffer.from(publicKey, 'hex'), 5))
+  const buffer = Buffer.from(blake2b(Buffer.from(publicKey, 'hex'), undefined, 5))
 
   return bs58check.encode(buffer)
 }

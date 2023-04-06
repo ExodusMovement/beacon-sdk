@@ -1,6 +1,6 @@
 import * as bs58check from 'bs58check'
 import { Network } from '@airgap/beacon-types'
-import { hash } from '@stablelib/blake2b'
+import { blake2b } from 'blakejs'
 import { encode } from '@stablelib/utf8'
 
 /**
@@ -20,7 +20,7 @@ export const getAccountIdentifier = async (address: string, network: Network): P
     data.push(`rpc:${network.rpcUrl}`)
   }
 
-  const buffer = Buffer.from(hash(encode(data.join('-')), 10))
+  const buffer = Buffer.from(blake2b(encode(data.join('-')), undefined, 10))
 
   return bs58check.encode(buffer)
 }

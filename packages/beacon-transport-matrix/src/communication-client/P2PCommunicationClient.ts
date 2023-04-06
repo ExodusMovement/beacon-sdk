@@ -36,7 +36,7 @@ import {
 } from '@airgap/beacon-core'
 import { ExposedPromise, generateGUID } from '@airgap/beacon-utils'
 import { KeyPair } from '@stablelib/ed25519'
-import { hash } from '@stablelib/blake2b'
+import { blake2b } from 'blakejs'
 import { encode } from '@stablelib/utf8'
 
 const logger = new Logger('P2PCommunicationClient')
@@ -336,7 +336,7 @@ export class P2PCommunicationClient extends CommunicationClient {
       `login ${loginString}, ${await this.getPublicKeyHash()} on ${relayServer.server}`
     )
 
-    const loginRawDigest = hash(encode(loginString), 32)
+    const loginRawDigest = blake2b(encode(loginString), undefined, 32)
 
     const secretKey = this.keyPair!.secretKey ?? (this.keyPair as any).privateKey
 
