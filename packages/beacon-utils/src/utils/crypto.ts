@@ -1,10 +1,8 @@
 import * as bs58check from 'bs58check'
 import * as nacl from "tweetnacl";
-import { randomBytes } from '@stablelib/random'
 import { encode } from '@stablelib/utf8'
 import { blake2b, blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
 import { convertPublicKeyToX25519, convertSecretKeyToX25519 } from '@stablelib/ed25519'
-import { concat } from '@stablelib/bytes'
 
 export const secretbox_NONCEBYTES = 24 // crypto_secretbox_NONCEBYTES
 export const secretbox_MACBYTES = 16 // crypto_secretbox_MACBYTES
@@ -53,7 +51,7 @@ export async function encryptCryptoboxPayload(
   message: string,
   sharedKey: Uint8Array
 ): Promise<string> {
-  const nonce = Buffer.from(randomBytes(secretbox_NONCEBYTES))
+  const nonce = Buffer.from(nacl.randomBytes(secretbox_NONCEBYTES))
 
   const combinedPayload = Buffer.concat([
     nonce,
@@ -108,7 +106,7 @@ export async function sealCryptobox(
 
   const encryptedMessage = nacl.box(bytesPayload, nonce, kxOtherPublicKey, keypair.secretKey)
 
-  return toHex(concat(keypair.publicKey, encryptedMessage))
+  return toHex(Buffer.concat([keypair.publicKey, encryptedMessage]))
 }
 
 /**

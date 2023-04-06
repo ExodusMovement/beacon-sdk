@@ -1,5 +1,5 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
-import { randomBytes } from '@stablelib/random'
+import { randomBytes } from 'tweetnacl'
 
 /**
  * Generate a random GUID
