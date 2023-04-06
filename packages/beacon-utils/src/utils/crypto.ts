@@ -2,9 +2,8 @@ import * as bs58check from 'bs58check'
 import * as nacl from "tweetnacl";
 import { randomBytes } from '@stablelib/random'
 import { encode } from '@stablelib/utf8'
-import { hash } from '@stablelib/blake2b'
+import { blake2b, blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
 import { convertPublicKeyToX25519, convertSecretKeyToX25519 } from '@stablelib/ed25519'
-import { BLAKE2b } from '@stablelib/blake2b'
 import { concat } from '@stablelib/bytes'
 
 export const secretbox_NONCEBYTES = 24 // crypto_secretbox_NONCEBYTES
@@ -29,10 +28,10 @@ export function toHex(value: any): string {
  */
 export async function getHexHash(key: string | Buffer | Uint8Array): Promise<string> {
   if (typeof key === 'string') {
-    return toHex(hash(encode(key), 32))
+    return toHex(blake2b(encode(key), undefined, 32))
   }
 
-  return toHex(hash(key, 32))
+  return toHex(blake2b(key, undefined, 32))
 }
 
 /**
@@ -41,7 +40,7 @@ export async function getHexHash(key: string | Buffer | Uint8Array): Promise<str
  * @param seed
  */
 export async function getKeypairFromSeed(seed: string): Promise<nacl.SignKeyPair> {
-  return nacl.sign.keyPair.fromSeed(hash(encode(seed), 32))
+  return nacl.sign.keyPair.fromSeed(blake2b(encode(seed), undefined, 32))
 }
 
 /**
@@ -100,8 +99,10 @@ export async function sealCryptobox(
 
   const keypair = nacl.box.keyPair()
 
-  const state = new BLAKE2b(24)
-  const nonce = state.update(keypair.publicKey, 32).update(kxOtherPublicKey, 32).digest()
+  const state = blake2bInit(24, undefined)
+  blake2bUpdate(state, keypair.publicKey)
+  blake2bUpdate(state, kxOtherPublicKey)
+  const nonce = blake2bFinal(state)
 
   const bytesPayload = typeof payload === 'string' ? encode(payload) : payload
 
@@ -131,8 +132,10 @@ export async function openCryptobox(
   const epk = bytesPayload.slice(0, 32)
   const ciphertext = bytesPayload.slice(32)
 
-  const state = new BLAKE2b(24)
-  const nonce = state.update(epk, 32).update(kxSelfPublicKey, 32).digest()
+  const state = blake2bInit(24, undefined)
+  blake2bUpdate(state, epk)
+  blake2bUpdate(state, kxSelfPublicKey)
+  const nonce = blake2bFinal(state)
 
   const decryptedMessage2 = nacl.box.open(ciphertext, nonce, epk, kxSelfPrivateKey)
 
@@ -189,7 +192,7 @@ export async function getAddressFromPublicKey(publicKey: string): Promise<string
     throw new Error(`invalid publicKey: ${publicKey}`)
   }
 
-  const payload: Uint8Array = hash(Buffer.from(plainPublicKey, 'hex'), 20)
+  const payload: Uint8Array = blake2b(Buffer.from(plainPublicKey, 'hex'), undefined, 20)
 
   return bs58check.encode(Buffer.concat([prefix, Buffer.from(payload)]))
 }
@@ -225,7 +228,7 @@ const toBuffer = async (message: string): Promise<Uint8Array> => {
 }
 
 const coinlibhash = async (message: Uint8Array, size: number = 32): Promise<Uint8Array> => {
-  return hash(message, size)
+  return blake2b(message, undefined, size)
 }
 
 export const signMessage = async (
