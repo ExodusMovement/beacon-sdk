@@ -1,4 +1,4 @@
-import { sign } from '@stablelib/ed25519'
+import * as nacl from "tweetnacl";
 import axios from 'axios'
 import {
   getHexHash,
@@ -340,7 +340,7 @@ export class P2PCommunicationClient extends CommunicationClient {
 
     const secretKey = this.keyPair!.secretKey ?? (this.keyPair as any).privateKey
 
-    const rawSignature = sign(secretKey, loginRawDigest)
+    const rawSignature = nacl.sign.detached(loginRawDigest, secretKey)
 
     try {
       await client.start({
