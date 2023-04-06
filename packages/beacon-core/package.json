@@ -38,8 +38,11 @@
     "@airgap/beacon-utils": "4.0.0",
     "@stablelib/ed25519": "^1.0.3",
     "@stablelib/utf8": "^1.0.1",
-    "tweetnacl": "^1.0.3",
     "blakejs": "^1.1.0",
-    "bs58check": "2.1.2"
+    "bs58check": "2.1.2",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@stablelib/x25519-session": "^1.0.4"
   }
 }
