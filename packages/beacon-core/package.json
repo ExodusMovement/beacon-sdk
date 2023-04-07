@@ -1,6 +1,6 @@
 {
   "name": "@exodus/airgap-beacon-core",
-  "version": "4.0.0",
+  "version": "4.0.0-exodus.0",
   "description": "> TODO: description",
   "author": "Andreas Gassmann <a.gassmann@papers.ch>",
   "homepage": "https://walletbeacon.io",
@@ -34,8 +34,8 @@
     "url": "https://github.com/airgap-it/beacon-sdk/issues"
   },
   "dependencies": {
-    "@exodus/airgap-beacon-types": "4.0.0",
-    "@exodus/airgap-beacon-utils": "4.0.0",
+    "@exodus/airgap-beacon-types": "4.0.0-exodus.0",
+    "@exodus/airgap-beacon-utils": "4.0.0-exodus.0",
     "@stablelib/ed25519": "^1.0.3",
     "@stablelib/utf8": "^1.0.1",
     "blakejs": "^1.1.0",
