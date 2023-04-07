@@ -6,19 +6,15 @@
   "homepage": "https://walletbeacon.io",
   "license": "ISC",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "unpkg": "dist/walletbeacon.wallet.min.js",
-  "types": "dist/esm/index.d.ts",
-  "exports": {
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/esm/index.js"
-  },
+  "types": "dist/cjs/index.d.ts",
+  "exports": "./dist/cjs/index.js",
   "directories": {
-    "lib": "dist/esm",
+    "lib": "dist/cjs",
     "test": "__tests__"
   },
   "files": [
-    "dist"
+    "dist/cjs"
   ],
   "publishConfig": {
     "access": "public"
