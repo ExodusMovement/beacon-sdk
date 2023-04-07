@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "es2020",
     "lib": ["es2015", "es2017.string", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
     "declaration": true,
     "outDir": "./dist/esm",
     "typeRoots": ["./node_modules/@types", "./src/typings"],
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,
