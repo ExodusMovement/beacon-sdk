@@ -1,6 +1,6 @@
 {
   "name": "@exodus/airgap-beacon-transport-matrix",
-  "version": "4.0.0",
+  "version": "4.0.0-exodus.0",
   "description": "> TODO: description",
   "author": "Andreas Gassmann <a.gassmann@papers.ch>",
   "homepage": "https://walletbeacon.io",
@@ -34,8 +34,8 @@
     "url": "https://github.com/airgap-it/beacon-sdk/issues"
   },
   "dependencies": {
-    "@exodus/airgap-beacon-core": "4.0.0",
-    "@exodus/airgap-beacon-utils": "4.0.0",
+    "@exodus/airgap-beacon-core": "4.0.0-exodus.0",
+    "@exodus/airgap-beacon-utils": "4.0.0-exodus.0",
     "axios": "0.24.0",
     "blakejs": "^1.1.0",
     "tweetnacl": "^1.0.3"
