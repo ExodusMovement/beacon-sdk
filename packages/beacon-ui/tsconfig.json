@@ -14,7 +14,7 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@airgap/beacon-ui": ["./src"]
+      "@exodus/airgap-beacon-ui": ["./src"]
     }
   },
   "include": ["src/**/*", "rollup.config.ts"]

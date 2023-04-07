@@ -5,7 +5,7 @@ import {
   Network,
   PermissionScope,
   Threshold
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 import { Notification } from '../../Notification'
 
 /**

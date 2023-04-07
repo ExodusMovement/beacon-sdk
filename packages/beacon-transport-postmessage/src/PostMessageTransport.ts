@@ -9,9 +9,9 @@ import {
   TransportStatus,
   ConnectionContext,
   Origin
-} from '@airgap/beacon-types'
-import { Storage } from '@airgap/beacon-types'
-import { Transport, PeerManager, Logger, windowRef } from '@airgap/beacon-core'
+} from '@exodus/airgap-beacon-types'
+import { Storage } from '@exodus/airgap-beacon-types'
+import { Transport, PeerManager, Logger, windowRef } from '@exodus/airgap-beacon-core'
 import { PostMessageClient } from './PostMessageClient'
 import { KeyPair } from '@stablelib/ed25519'
 

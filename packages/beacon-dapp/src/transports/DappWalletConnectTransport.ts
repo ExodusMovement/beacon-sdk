@@ -3,9 +3,9 @@ import {
   Storage,
   ExtendedWalletConnectPairingResponse,
   TransportStatus
-} from '@airgap/beacon-types'
-import { Logger } from '@airgap/beacon-core'
-import { WalletConnectTransport } from '@airgap/beacon-transport-walletconnect'
+} from '@exodus/airgap-beacon-types'
+import { Logger } from '@exodus/airgap-beacon-core'
+import { WalletConnectTransport } from '@exodus/airgap-beacon-transport-walletconnect'
 import { KeyPair } from '@stablelib/ed25519'
 import { SignClientTypes } from '@walletconnect/types'
 

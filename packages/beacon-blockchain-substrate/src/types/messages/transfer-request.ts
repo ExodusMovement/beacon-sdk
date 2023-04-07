@@ -1,4 +1,4 @@
-import { BlockchainMessage } from '@airgap/beacon-types'
+import { BlockchainMessage } from '@exodus/airgap-beacon-types'
 import { SubstrateMessageType } from '../message-type'
 import { SubstratePermissionScope } from '../permission-scope'
 

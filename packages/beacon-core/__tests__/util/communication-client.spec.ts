@@ -2,7 +2,7 @@ import * as chai from 'chai'
 import * as chaiAsPromised from 'chai-as-promised'
 import 'mocha'
 import { CommunicationClient } from '../../src'
-import { getKeypairFromSeed, toHex } from '@airgap/beacon-utils'
+import { getKeypairFromSeed, toHex } from '@exodus/airgap-beacon-utils'
 import { KeyPair } from '@stablelib/ed25519'
 import { SessionKeys } from '@stablelib/x25519-session'
 

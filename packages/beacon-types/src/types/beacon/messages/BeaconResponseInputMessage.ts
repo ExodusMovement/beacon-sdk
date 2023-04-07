@@ -1,4 +1,4 @@
-import { Optional } from '@airgap/beacon-types'
+import { Optional } from '@exodus/airgap-beacon-types'
 import {
   PermissionResponse,
   OperationResponse,
@@ -7,7 +7,7 @@ import {
   BroadcastResponse,
   AcknowledgeResponse,
   ErrorResponse
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 
 /**
  * @category Wallet

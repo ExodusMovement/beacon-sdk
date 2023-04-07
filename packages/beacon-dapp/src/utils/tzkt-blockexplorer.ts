@@ -1,4 +1,4 @@
-import { Network, NetworkType } from '@airgap/beacon-types'
+import { Network, NetworkType } from '@exodus/airgap-beacon-types'
 import { BlockExplorer } from './block-explorer'
 
 export class TzktBlockExplorer extends BlockExplorer {

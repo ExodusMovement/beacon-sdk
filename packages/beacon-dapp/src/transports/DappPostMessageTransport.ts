@@ -3,9 +3,9 @@ import {
   StorageKey,
   Storage,
   ExtendedPostMessagePairingResponse
-} from '@airgap/beacon-types'
-import { Logger } from '@airgap/beacon-core'
-import { PostMessageTransport } from '@airgap/beacon-transport-postmessage'
+} from '@exodus/airgap-beacon-types'
+import { Logger } from '@exodus/airgap-beacon-core'
+import { PostMessageTransport } from '@exodus/airgap-beacon-transport-postmessage'
 import { KeyPair } from '@stablelib/ed25519'
 
 const logger = new Logger('DappPostMessageTransport')

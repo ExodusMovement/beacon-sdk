@@ -1,4 +1,4 @@
-import { BeaconBaseMessage, BeaconErrorType, BeaconMessageType } from '@airgap/beacon-types'
+import { BeaconBaseMessage, BeaconErrorType, BeaconMessageType } from '@exodus/airgap-beacon-types'
 
 /**
  * @category Message
