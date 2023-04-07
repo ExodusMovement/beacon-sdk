@@ -1,4 +1,4 @@
-import { Optional } from '@airgap/beacon-types'
+import { Optional } from '@exodus/airgap-beacon-types'
 import { TezosActivateAccountOperation } from './operations/ActivateAccount'
 import { TezosBallotOperation } from './operations/Ballot'
 import { TezosDelegationOperation } from './operations/Delegation'

@@ -3,7 +3,7 @@ import {
   getAccountIdentifier,
   Logger,
   PermissionManager
-} from '@airgap/beacon-core'
+} from '@exodus/airgap-beacon-core'
 import {
   ErrorResponse,
   BeaconMessage,
@@ -23,8 +23,8 @@ import {
   PermissionResponseV3,
   BeaconBaseMessage
   // EncryptPayloadResponse
-} from '@airgap/beacon-types'
-import { getAddressFromPublicKey } from '@airgap/beacon-utils'
+} from '@exodus/airgap-beacon-types'
+import { getAddressFromPublicKey } from '@exodus/airgap-beacon-utils'
 
 interface OutgoingResponseInterceptorOptions {
   senderId: string

@@ -1,1 +1,1 @@
-// Tests are located in the @airgap/beacon-dapp package
+// Tests are located in the @exodus/airgap-beacon-dapp package

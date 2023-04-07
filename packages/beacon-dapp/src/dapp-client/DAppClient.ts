@@ -65,7 +65,7 @@ import {
   // EncryptPayloadResponseOutput,
   // EncryptPayloadResponse,
   // EncryptPayloadRequest
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 import {
   Client,
   Transport,
@@ -76,19 +76,19 @@ import {
   getAccountIdentifier,
   getSenderId,
   Logger
-} from '@airgap/beacon-core'
-import { getAddressFromPublicKey, ExposedPromise, generateGUID, toHex } from '@airgap/beacon-utils'
+} from '@exodus/airgap-beacon-core'
+import { getAddressFromPublicKey, ExposedPromise, generateGUID, toHex } from '@exodus/airgap-beacon-utils'
 import { messageEvents } from '../beacon-message-events'
 import { BlockExplorer } from '../utils/block-explorer'
 import { TzktBlockExplorer } from '../utils/tzkt-blockexplorer'
 
 import { DAppClientOptions } from './DAppClientOptions'
-import { AlertButton, closeToast } from '@airgap/beacon-ui'
-import { BeaconEventHandler } from '@airgap/beacon-dapp'
+import { AlertButton, closeToast } from '@exodus/airgap-beacon-ui'
+import { BeaconEventHandler } from '@exodus/airgap-beacon-dapp'
 import { DappPostMessageTransport } from '../transports/DappPostMessageTransport'
 import { DappP2PTransport } from '../transports/DappP2PTransport'
 import { DappWalletConnectTransport } from '../transports/DappWalletConnectTransport'
-import { PostMessageTransport } from '@airgap/beacon-transport-postmessage'
+import { PostMessageTransport } from '@exodus/airgap-beacon-transport-postmessage'
 import {
   getColorMode,
   setColorMode,
@@ -100,8 +100,8 @@ import {
   getExtensionList,
   getWebList,
   getiOSList
-} from '@airgap/beacon-ui'
-import { signMessage } from '@airgap/beacon-utils'
+} from '@exodus/airgap-beacon-ui'
+import { signMessage } from '@exodus/airgap-beacon-utils'
 
 const logger = new Logger('DAppClient')
 

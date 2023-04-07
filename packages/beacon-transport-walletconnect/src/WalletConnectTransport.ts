@@ -8,8 +8,8 @@ import {
   ExtendedWalletConnectPairingResponse,
   StorageKey,
   WalletConnectPairingRequest
-} from '@airgap/beacon-types'
-import { Transport, PeerManager } from '@airgap/beacon-core'
+} from '@exodus/airgap-beacon-types'
+import { Transport, PeerManager } from '@exodus/airgap-beacon-core'
 import { SignClientTypes } from '@walletconnect/types'
 
 /**

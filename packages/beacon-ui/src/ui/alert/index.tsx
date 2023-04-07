@@ -8,7 +8,7 @@ import {
   PostMessagePairingRequest,
   StorageKey,
   WalletConnectPairingRequest
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 import { isServer, render } from 'solid-js/web'
 import { desktopList, extensionList, iOSList, webList } from './wallet-lists'
 
@@ -26,8 +26,8 @@ import * as infoStyles from '../../components/info/styles.css'
 import * as qrStyles from '../../components/qr/styles.css'
 import * as loaderStyles from '../../components/loader/styles.css'
 
-import { Serializer, windowRef } from '@airgap/beacon-core'
-import { PostMessageTransport } from '@airgap/beacon-transport-postmessage'
+import { Serializer, windowRef } from '@exodus/airgap-beacon-core'
+import { PostMessageTransport } from '@exodus/airgap-beacon-transport-postmessage'
 import {
   arrangeTopWallets,
   MergedWallet,

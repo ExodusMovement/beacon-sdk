@@ -4,7 +4,7 @@ import {
   SignPayloadRequest,
   BroadcastRequest
   // EncryptPayloadRequest
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 
 /**
  * @internalapi

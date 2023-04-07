@@ -1,11 +1,11 @@
-import { Optional } from '@airgap/beacon-types'
+import { Optional } from '@exodus/airgap-beacon-types'
 import {
   PermissionRequest,
   OperationRequest,
   SignPayloadRequest,
   // EncryptPayloadRequest,
   BroadcastRequest
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 
 /**
  * @internalapi

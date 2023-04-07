@@ -1,6 +1,6 @@
-import { windowRef, Serializer, getSenderId, MessageBasedClient } from '@airgap/beacon-core'
+import { windowRef, Serializer, getSenderId, MessageBasedClient } from '@exodus/airgap-beacon-core'
 
-import { openCryptobox, secretbox_NONCEBYTES, secretbox_MACBYTES } from '@airgap/beacon-utils'
+import { openCryptobox, secretbox_NONCEBYTES, secretbox_MACBYTES } from '@exodus/airgap-beacon-utils'
 import {
   ExtensionMessage,
   ExtensionMessageTarget,
@@ -10,7 +10,7 @@ import {
   PostMessagePairingResponse,
   EncryptedExtensionMessage,
   PostMessagePairingRequest
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 
 /**
  * @internalapi

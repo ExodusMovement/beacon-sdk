@@ -1,4 +1,4 @@
-import { BEACON_VERSION, CommunicationClient, Serializer } from '@airgap/beacon-core'
+import { BEACON_VERSION, CommunicationClient, Serializer } from '@exodus/airgap-beacon-core'
 import { SignClient } from '@walletconnect/sign-client'
 import Client from '@walletconnect/sign-client'
 import { SessionTypes, SignClientTypes } from '@walletconnect/types'
@@ -24,8 +24,8 @@ import {
   PermissionScope,
   SignPayloadRequest,
   SignPayloadResponse
-} from '@airgap/beacon-types'
-import { generateGUID } from '@airgap/beacon-utils'
+} from '@exodus/airgap-beacon-types'
+import { generateGUID } from '@exodus/airgap-beacon-utils'
 
 const TEZOS_PLACEHOLDER = 'tezos'
 

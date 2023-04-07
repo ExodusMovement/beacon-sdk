@@ -21,11 +21,11 @@ import {
   TezosOperationType,
   TransportStatus,
   ExtendedP2PPairingRequest
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 
 import { MockTransport } from '../../../test/test-utils/MockTransport'
 import { availableTransports } from '../src/utils/available-transports'
-import { ExposedPromise } from '@airgap/beacon-utils'
+import { ExposedPromise } from '@exodus/airgap-beacon-utils'
 import {
   windowRef,
   Logger,
@@ -34,10 +34,10 @@ import {
   getSenderId,
   AccountManager,
   Transport
-} from '@airgap/beacon-core'
+} from '@exodus/airgap-beacon-core'
 
 import { DAppClient, BeaconEvent } from '../src'
-import { PostMessageTransport } from '@airgap/beacon-transport-postmessage'
+import { PostMessageTransport } from '@exodus/airgap-beacon-transport-postmessage'
 import { DappPostMessageTransport } from '../src/transports/DappPostMessageTransport'
 
 // use chai-as-promised plugin

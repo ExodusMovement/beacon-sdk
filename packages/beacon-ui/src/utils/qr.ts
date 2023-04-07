@@ -1,7 +1,7 @@
 import QRCode from 'qrcode-svg'
-import { Logger } from '@airgap/beacon-core'
+import { Logger } from '@exodus/airgap-beacon-core'
 import { getColorMode } from './colorMode'
-import { ColorMode } from '@airgap/beacon-types'
+import { ColorMode } from '@exodus/airgap-beacon-types'
 
 const logger = new Logger('QR')
 

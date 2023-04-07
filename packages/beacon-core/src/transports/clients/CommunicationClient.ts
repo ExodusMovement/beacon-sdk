@@ -5,8 +5,8 @@ import {
   ExtendedPostMessagePairingResponse,
   WalletConnectPairingRequest,
   ExtendedWalletConnectPairingResponse
-} from '@airgap/beacon-types'
-import { toHex, getHexHash, sealCryptobox } from '@airgap/beacon-utils'
+} from '@exodus/airgap-beacon-types'
+import { toHex, getHexHash, sealCryptobox } from '@exodus/airgap-beacon-utils'
 import { convertPublicKeyToX25519, convertSecretKeyToX25519, KeyPair } from '@stablelib/ed25519'
 import { blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
 import * as nacl from "tweetnacl";

@@ -6,7 +6,7 @@ import {
   ColorMode,
   NodeDistributions,
   AnalyticsInterface
-} from '@airgap/beacon-types'
+} from '@exodus/airgap-beacon-types'
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
   {
