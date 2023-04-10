@@ -1,7 +1,7 @@
 import * as bs58check from 'bs58check'
 import * as nacl from "tweetnacl";
 import { encode } from '@stablelib/utf8'
-import { blake2b, blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
+import { blake2b, blake2bInit, blake2bUpdate, blake2bFinal } from '@exodus/blakejs'
 // @ts-ignore
 import { convertPublicKeyToX25519, convertPrivateKeyToX25519 } from '@exodus/sodium-crypto'
 
