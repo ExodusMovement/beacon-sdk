@@ -2,7 +2,8 @@ import * as bs58check from 'bs58check'
 import * as nacl from "tweetnacl";
 import { encode } from '@stablelib/utf8'
 import { blake2b, blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
-import { convertPublicKeyToX25519, convertSecretKeyToX25519 } from '@stablelib/ed25519'
+// @ts-ignore
+import { convertPublicKeyToX25519, convertPrivateKeyToX25519 } from '@exodus/sodium-crypto'
 
 export const secretbox_NONCEBYTES = 24 // crypto_secretbox_NONCEBYTES
 export const secretbox_MACBYTES = 16 // crypto_secretbox_MACBYTES
@@ -93,7 +94,7 @@ export async function sealCryptobox(
   payload: string | Buffer,
   otherPublicKey: Uint8Array
 ): Promise<string> {
-  const kxOtherPublicKey = convertPublicKeyToX25519(Buffer.from(otherPublicKey)) // Secret bytes to scalar bytes
+  const kxOtherPublicKey = await convertPublicKeyToX25519(Buffer.from(otherPublicKey)) // Secret bytes to scalar bytes
 
   const keypair = nacl.box.keyPair()
 
@@ -121,8 +122,8 @@ export async function openCryptobox(
   publicKey: Uint8Array,
   privateKey: Uint8Array
 ): Promise<string> {
-  const kxSelfPrivateKey = convertSecretKeyToX25519(Buffer.from(privateKey)) // Secret bytes to scalar bytes
-  const kxSelfPublicKey = convertPublicKeyToX25519(Buffer.from(publicKey)) // Secret bytes to scalar bytes
+  const kxSelfPrivateKey = await convertPrivateKeyToX25519(Buffer.from(privateKey)) // Secret bytes to scalar bytes
+  const kxSelfPublicKey = await convertPublicKeyToX25519(Buffer.from(publicKey)) // Secret bytes to scalar bytes
 
   const bytesPayload =
     typeof encryptedPayload === 'string' ? encode(encryptedPayload) : encryptedPayload
