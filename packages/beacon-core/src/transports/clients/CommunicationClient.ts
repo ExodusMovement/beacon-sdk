@@ -7,7 +7,9 @@ import {
   ExtendedWalletConnectPairingResponse
 } from '@exodus/airgap-beacon-types'
 import { toHex, getHexHash, sealCryptobox } from '@exodus/airgap-beacon-utils'
-import { convertPublicKeyToX25519, convertSecretKeyToX25519, KeyPair } from '@stablelib/ed25519'
+import { KeyPair } from '@stablelib/ed25519'
+// @ts-ignore
+import { convertPublicKeyToX25519, convertPrivateKeyToX25519 } from '@exodus/sodium-crypto'
 import { blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
 import * as nacl from "tweetnacl";
 
@@ -44,9 +46,9 @@ export abstract class CommunicationClient {
     selfKeypair: KeyPair
   ): Promise<{send: Uint8Array, receive: Uint8Array}> {
     // https://github.com/StableLib/stablelib/blob/a7bac13/packages/x25519-session/x25519-session.ts#L61
-    const myPublicKey = convertPublicKeyToX25519(selfKeypair.publicKey)
-    const mySecretKey = convertSecretKeyToX25519(selfKeypair.secretKey)
-    const theirPublicKey = convertPublicKeyToX25519(Buffer.from(otherPublicKey, 'hex'))
+    const myPublicKey = await convertPublicKeyToX25519(selfKeypair.publicKey)
+    const mySecretKey = await convertPrivateKeyToX25519(selfKeypair.secretKey)
+    const theirPublicKey = await convertPublicKeyToX25519(Buffer.from(otherPublicKey, 'hex'))
     const sk = nacl.scalarMult(mySecretKey, theirPublicKey)
     const state = blake2bInit(64, undefined)
     blake2bUpdate(state, sk)
@@ -70,9 +72,9 @@ export abstract class CommunicationClient {
     selfKeypair: KeyPair
   ): Promise<{send: Uint8Array, receive: Uint8Array}> {
     // https://github.com/ExodusMovement/exodus-mobile/pull/12437/files
-    const myPublicKey = convertPublicKeyToX25519(selfKeypair.publicKey)
-    const mySecretKey = convertSecretKeyToX25519(selfKeypair.secretKey)
-    const theirPublicKey = convertPublicKeyToX25519(Buffer.from(otherPublicKey, 'hex'))
+    const myPublicKey = await convertPublicKeyToX25519(selfKeypair.publicKey)
+    const mySecretKey = await convertPrivateKeyToX25519(selfKeypair.secretKey)
+    const theirPublicKey = await convertPublicKeyToX25519(Buffer.from(otherPublicKey, 'hex'))
     const sk = nacl.scalarMult(mySecretKey, theirPublicKey)
     const state = blake2bInit(64, undefined)
     blake2bUpdate(state, sk)
