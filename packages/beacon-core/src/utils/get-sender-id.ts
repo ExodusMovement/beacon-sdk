@@ -1,4 +1,4 @@
-import { blake2b } from 'blakejs'
+import { blake2b } from '@exodus/blakejs'
 import * as bs58check from 'bs58check'
 
 /**

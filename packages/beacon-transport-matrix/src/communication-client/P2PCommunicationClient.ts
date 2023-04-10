@@ -36,7 +36,7 @@ import {
 } from '@exodus/airgap-beacon-core'
 import { ExposedPromise, generateGUID } from '@exodus/airgap-beacon-utils'
 import { KeyPair } from '@stablelib/ed25519'
-import { blake2b } from 'blakejs'
+import { blake2b } from '@exodus/blakejs'
 import { encode } from '@stablelib/utf8'
 
 const logger = new Logger('P2PCommunicationClient')

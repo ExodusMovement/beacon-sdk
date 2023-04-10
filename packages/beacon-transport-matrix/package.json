@@ -33,7 +33,7 @@
     "@exodus/airgap-beacon-core": "4.0.0-exodus.0",
     "@exodus/airgap-beacon-utils": "4.0.0-exodus.0",
     "axios": "0.24.0",
-    "blakejs": "^1.1.0",
+    "@exodus/blakejs": "^1.1.1-exodus.0",
     "tweetnacl": "^1.0.3"
   }
 }

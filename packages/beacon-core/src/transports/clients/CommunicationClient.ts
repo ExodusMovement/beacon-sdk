@@ -10,7 +10,7 @@ import { toHex, getHexHash, sealCryptobox } from '@exodus/airgap-beacon-utils'
 import { KeyPair } from '@stablelib/ed25519'
 // @ts-ignore
 import { convertPublicKeyToX25519, convertPrivateKeyToX25519 } from '@exodus/sodium-crypto'
-import { blake2bInit, blake2bUpdate, blake2bFinal } from 'blakejs'
+import { blake2bInit, blake2bUpdate, blake2bFinal } from '@exodus/blakejs'
 import * as nacl from "tweetnacl";
 
 /**
