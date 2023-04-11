@@ -8,6 +8,9 @@ module.exports = {
     libraryTarget: 'umd'
   },
   resolve: {
+    alias: {
+      libsodium: require.resolve('@exodus/libsodium-wrappers')
+    },
     fallback: {
       crypto: false,
       fs: false,
