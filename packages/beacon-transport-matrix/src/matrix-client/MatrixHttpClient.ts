@@ -1,10 +1,8 @@
-import axios, { AxiosError, AxiosResponse, CancelTokenSource, Method as HttpMethod } from 'axios'
+// @ts-ignore
+import fetch from 'node-fetch'
 
 import { keys } from '@exodus/airgap-beacon-utils'
 import { MatrixRequest, MatrixRequestParams } from './models/api/MatrixRequest'
-import { Logger } from '@exodus/airgap-beacon-core'
-
-const logger = new Logger('MatrixHttpClient')
 
 interface HttpOptions {
   accessToken?: string
@@ -16,10 +14,8 @@ const CLIENT_API_R0 = '/_matrix/client/r0'
  * Handling the HTTP connection to the matrix synapse node
  */
 export class MatrixHttpClient {
-  private readonly cancelTokenSource: CancelTokenSource
 
   constructor(private readonly baseUrl: string) {
-    this.cancelTokenSource = axios.CancelToken.source()
   }
 
   /**
@@ -71,7 +67,7 @@ export class MatrixHttpClient {
   }
 
   public async cancelAllRequests(): Promise<void> {
-    return this.cancelTokenSource.cancel('Manually cancelled')
+    throw new Error("not implemented by exodus fork yet")
   }
 
   /**
@@ -84,33 +80,31 @@ export class MatrixHttpClient {
    * @param data
    */
   private async send<T>(
-    method: HttpMethod,
+    method: string,
     endpoint: string,
     config?: HttpOptions,
     requestParams?: MatrixRequestParams<T>,
     data?: MatrixRequest<T>
   ): Promise<T> {
-    const headers = config ? this.getHeaders(config) : undefined
-    const params = requestParams ? this.getParams(requestParams) : undefined
+    const headers = config ? this.getHeaders(config) : {}
+    const params = requestParams ? this.getParams(requestParams) : {}
 
-    let response: AxiosResponse<T>
-    try {
-      response = await axios.request({
-        method,
-        url: endpoint,
-        baseURL: this.apiUrl(CLIENT_API_R0),
-        headers,
-        data,
-        params,
-        cancelToken: this.cancelTokenSource.token
-      })
-    } catch (error) {
-      const axiosError: AxiosError = error as any
-      logger.error('send', axiosError.code, axiosError.message, (axiosError as any).response.data)
-      throw (error as any).response.data
+    const query = new URLSearchParams(params)
+    const url = `${this.apiUrl(CLIENT_API_R0)}/${endpoint}?${query}`
+    const options: any = {
+      method,
+      url,
+      headers,
+      body: undefined
     }
+    if (data) {
+      options.headers['Content-Type'] = 'application/json'
+      options.body = JSON.stringify(data)
+    }
+    const response = await fetch(url, options)
+    const json = await response.json()
 
-    return response.data
+    return json
   }
 
   /**
@@ -144,15 +138,16 @@ export class MatrixHttpClient {
    */
   private getParams(
     _params: MatrixRequestParams<any>
-  ): { [key: string]: string | number | boolean } | undefined {
+  ): { [key: string]: string} {
     if (!_params) {
-      return undefined
+      return {}
     }
 
     const params = Object.assign(_params, {})
     keys(params).forEach((key) => params[key] === undefined && delete params[key])
 
-    return params as { [key: string]: string | number | boolean }
+    // hack to make the return value compatible with URLSearchParams typing
+    return Object.fromEntries(Object.entries(params).map(([k,v]) => [k, `${v}`]))
   }
 
   /**

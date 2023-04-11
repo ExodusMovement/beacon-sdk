@@ -32,7 +32,6 @@
   "dependencies": {
     "@exodus/airgap-beacon-core": "4.0.0-exodus.1",
     "@exodus/airgap-beacon-utils": "4.0.0-exodus.1",
-    "axios": "0.24.0",
     "@exodus/fetch": "^1.2.1",
     "@exodus/blakejs": "^1.1.1-exodus.0",
     "tweetnacl": "^1.0.3"
