@@ -1,4 +1,5 @@
-import axios from 'axios'
+// @ts-ignore
+import { fetch } from '@exodus/fetch';
 import {
   Serializer,
   Client,
@@ -160,8 +161,10 @@ export class WalletClient extends Client {
     oracleUrl: string = NOTIFICATION_ORACLE_URL
   ) {
     // Check if account is already registered
-    const challenge: { id: string; timestamp: string } = (await axios.get(`${oracleUrl}/challenge`))
-      .data
+    const response = await fetch(`${oracleUrl}/challenge`)
+    const jsonData = await response.json()
+    // @ts-ignore
+    const challenge: { id: string; timestamp: string } = jsonData
 
     const constructedString = [
       'Tezos Signed Message: ',
@@ -197,22 +200,30 @@ export class WalletClient extends Client {
       return token
     }
 
+    const payload = {
+      name: this.name,
+      challenge,
+      accountPublicKey,
+      signature,
+      backendUrl,
+      protocolIdentifier,
+      deviceId
+    }
+    const response = (
+      await fetch(`${oracleUrl}/register`, {
+        method: "POST",
+	headers: { "Content-Type": "application/json" },
+	body: JSON.stringify(payload)
+      })
+    )
+
+    // @ts-ignore
     const register: {
       accessToken: string
       managementToken: string
       message: string
       success: boolean
-    } = (
-      await axios.post(`${oracleUrl}/register`, {
-        name: this.name,
-        challenge,
-        accountPublicKey,
-        signature,
-        backendUrl,
-        protocolIdentifier,
-        deviceId
-      })
-    ).data
+    } = await response.json()
 
     const newToken = {
       publicKey: accountPublicKey,

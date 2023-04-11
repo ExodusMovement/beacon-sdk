@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@exodus/airgap-beacon-core": "4.0.0-exodus.0",
+    "@exodus/fetch": "^1.2.1",
     "@exodus/airgap-beacon-transport-matrix": "4.0.0-exodus.0",
     "@exodus/airgap-beacon-transport-postmessage": "4.0.0-exodus.0"
   }

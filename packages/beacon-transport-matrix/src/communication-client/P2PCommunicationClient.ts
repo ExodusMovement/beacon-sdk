@@ -1,5 +1,6 @@
 import * as nacl from "tweetnacl";
-import axios from 'axios'
+// @ts-ignore
+import { fetch } from '@exodus/fetch';
 import {
   getHexHash,
   toHex,
@@ -257,13 +258,16 @@ export class P2PCommunicationClient extends CommunicationClient {
   }
 
   public async getBeaconInfo(server: string): Promise<BeaconInfoResponse> {
-    return axios
-      .get<BeaconInfoResponse>(`https://${server}/_synapse/client/beacon/info`)
-      .then((res) => ({
-        region: res.data.region,
-        known_servers: res.data.known_servers,
-        timestamp: Math.floor(res.data.timestamp)
-      }))
+    const res = await fetch(`https://${server}/_synapse/client/beacon/info`)
+
+    // @ts-ignore
+    const data: BeaconInfoResponse = await res.json()
+
+    return {
+        region: data.region,
+        known_servers: data.known_servers,
+        timestamp: Math.floor(data.timestamp)
+      }
   }
 
   public async tryJoinRooms(roomId: string, retry: number = 1): Promise<void> {
