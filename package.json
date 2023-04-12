@@ -76,7 +76,6 @@
     "@walletconnect/types": "^2.0.0-rc.4",
     "@walletconnect/utils": "^2.0.0-rc.4",
     "@web3modal/standalone": "2.0.0",
-    "libsodium-wrappers": "^0.7.9",
     "stream-browserify": "^3.0.0"
   },
   "devDependencies": {
