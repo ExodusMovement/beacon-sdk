@@ -6,7 +6,7 @@ interface IEvents {
 }
 
 export class EventEmitter {
-  private readonly events: IEvents = {}
+  private readonly events: IEvents = Object.create(null)
 
   public on(event: string, listener: Listener): () => void {
     if (typeof this.events[event] !== 'object') {

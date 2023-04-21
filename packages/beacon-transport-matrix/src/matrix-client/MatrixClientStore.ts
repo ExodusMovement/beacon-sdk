@@ -37,7 +37,7 @@ export class MatrixClientStore {
   /**
    * The state of the matrix client
    */
-  private state: MatrixStateStore = {
+  private state: MatrixStateStore = Object.assign(Object.create(null), {
     isRunning: false,
     userId: undefined,
     deviceId: undefined,
@@ -46,8 +46,8 @@ export class MatrixClientStore {
     syncToken: undefined,
     pollingTimeout: undefined,
     pollingRetries: 0,
-    rooms: {}
-  }
+    rooms: Object.create(null)
+  })
 
   /**
    * Listeners that will be called when the state changes
@@ -173,7 +173,7 @@ export class MatrixClientStore {
     )
 
     if (updatedCachedFields.length > 0) {
-      const filteredState: Record<string, any> = {}
+      const filteredState: Record<string, any> = Object.create(null)
       PRESERVED_FIELDS.forEach((key) => {
         filteredState[key] = this.state[key]
       })
@@ -217,7 +217,7 @@ export class MatrixClientStore {
 
     const newRooms: MatrixRoom[] = Array.isArray(_newRooms) ? _newRooms : Object.values(_newRooms)
 
-    const merged: Record<string, MatrixRoom> = Object.assign({}, oldRooms)
+    const merged: Record<string, MatrixRoom> = Object.assign(Object.create(null), oldRooms)
     newRooms.forEach((newRoom: MatrixRoom) => {
       merged[newRoom.id] = MatrixRoom.merge(newRoom, oldRooms[newRoom.id])
     })

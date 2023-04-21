@@ -42,7 +42,7 @@ import { encode } from '@stablelib/utf8'
 
 const logger = new Logger('P2PCommunicationClient')
 
-const REGIONS_AND_SERVERS: NodeDistributions = {
+const REGIONS_AND_SERVERS: NodeDistributions = Object.assign(Object.create(null), {
   [Regions.EUROPE_WEST]: [
     'beacon-node-1.diamond.papers.tech',
     'beacon-node-1.sky.papers.tech',
@@ -53,7 +53,7 @@ const REGIONS_AND_SERVERS: NodeDistributions = {
     'beacon-node-1.hope-4.papers.tech',
     'beacon-node-1.hope-5.papers.tech'
   ]
-}
+})
 
 interface BeaconInfoResponse {
   region: string
@@ -99,10 +99,10 @@ export class P2PCommunicationClient extends CommunicationClient {
     this.ENABLED_RELAY_SERVERS = REGIONS_AND_SERVERS
 
     if (matrixNodes) {
-      this.ENABLED_RELAY_SERVERS = {
-        ...REGIONS_AND_SERVERS,
-        ...matrixNodes
-      }
+      this.ENABLED_RELAY_SERVERS = Object.assign(Object.create(null),
+        REGIONS_AND_SERVERS,
+        matrixNodes
+      )
     }
   }
 
@@ -569,7 +569,7 @@ export class P2PCommunicationClient extends CommunicationClient {
       .filter((entry) => entry[1] !== roomId)
       .reduce(
         (pv, cv) => ({ ...pv, [cv[0]]: cv[1] }),
-        {} as {
+        Object.create(null) as {
           [key: string]: string | undefined
         }
       )

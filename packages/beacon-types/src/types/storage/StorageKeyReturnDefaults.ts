@@ -8,7 +8,7 @@ export type StorageKeyReturnDefaults = { [key in StorageKey]: StorageKeyReturnTy
 /**
  * @internalapi
  */
-export const defaultValues: StorageKeyReturnDefaults = {
+export const defaultValues: StorageKeyReturnDefaults = Object.assign(Object.create(null), {
   [StorageKey.TRANSPORT_P2P_PEERS_DAPP]: [],
   [StorageKey.TRANSPORT_P2P_PEERS_WALLET]: [],
   [StorageKey.TRANSPORT_POSTMESSAGE_PEERS_DAPP]: [],
@@ -26,4 +26,4 @@ export const defaultValues: StorageKeyReturnDefaults = {
   [StorageKey.MATRIX_PEER_ROOM_IDS]: {},
   [StorageKey.MATRIX_SELECTED_NODE]: undefined,
   [StorageKey.MULTI_NODE_SETUP_DONE]: undefined
-}
+})

@@ -145,7 +145,7 @@ export class MatrixRoom {
    * @param events
    */
   private static getUniqueEvents(events: MatrixStateEvent[]): MatrixStateEvent[] {
-    const eventIds: Record<string, number> = {}
+    const eventIds: Record<string, number> = Object.create(null)
     const uniqueEvents: MatrixStateEvent[] = []
 
     events.forEach((event: MatrixStateEvent, index: number) => {
