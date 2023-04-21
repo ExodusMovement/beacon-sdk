@@ -7,7 +7,7 @@ import { MatrixMessageType } from '../models/MatrixMessage'
  * @param event MatrixStateEvent
  */
 export const isCreateEvent = (event: MatrixStateEvent): boolean =>
-  event.type === 'm.room.create' && event.content instanceof Object && 'creator' in event.content
+  event.type === 'm.room.create' && !!event.content && typeof event.content === 'object' && 'creator' in event.content
 
 /**
  * Check if an event is a join event
@@ -16,10 +16,11 @@ export const isCreateEvent = (event: MatrixStateEvent): boolean =>
  */
 export const isJoinEvent = (event: MatrixStateEvent): boolean =>
   event.type === 'm.room.member' &&
-  event.content instanceof Object &&
+  !!event.content &&
+  typeof event.content === 'object' &&
   'membership' in event.content &&
   // eslint-disable-next-line dot-notation
-  event.content['membership'] === 'join'
+  (event.content as any)['membership'] === 'join'
 
 /**
  * Check if an event is a message event
@@ -35,7 +36,8 @@ export const isMessageEvent = (event: MatrixStateEvent): boolean => event.type =
  */
 export const isTextMessageEvent = (event: MatrixStateEvent): event is MatrixStateEventMessageText =>
   isMessageEvent(event) &&
-  event.content instanceof Object &&
+  !!event.content &&
+  typeof event.content === 'object' &&
   'msgtype' in event.content &&
   // eslint-disable-next-line dot-notation
-  event.content['msgtype'] === MatrixMessageType.TEXT
+  (event.content as any)['msgtype'] === MatrixMessageType.TEXT
