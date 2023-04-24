@@ -97,7 +97,7 @@ export class MatrixEventService {
 
     try {
       const response = await this.httpClient.put<MatrixEventSendResponse>(
-        `/rooms/${encodeURIComponent(roomId)}/send/${type}/${encodeURIComponent(txnId)}`,
+        `/rooms/${encodeURIComponent(roomId)}/send/${encodeURIComponent(type)}/${encodeURIComponent(txnId)}`,
         content,
         { accessToken }
       )
