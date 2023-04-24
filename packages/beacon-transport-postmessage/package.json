@@ -1,6 +1,6 @@
 {
   "name": "@exodus/airgap-beacon-transport-postmessage",
-  "version": "4.0.0-exodus.2",
+  "version": "4.0.0-exodus.3",
   "description": "> TODO: description",
   "author": "Andreas Gassmann <a.gassmann@papers.ch>",
   "homepage": "https://walletbeacon.io",
@@ -30,8 +30,8 @@
     "url": "https://github.com/airgap-it/beacon-sdk/issues"
   },
   "dependencies": {
-    "@exodus/airgap-beacon-core": "4.0.0-exodus.2",
-    "@exodus/airgap-beacon-types": "4.0.0-exodus.2",
-    "@exodus/airgap-beacon-utils": "4.0.0-exodus.2"
+    "@exodus/airgap-beacon-core": "4.0.0-exodus.3",
+    "@exodus/airgap-beacon-types": "4.0.0-exodus.3",
+    "@exodus/airgap-beacon-utils": "4.0.0-exodus.3"
   }
 }
