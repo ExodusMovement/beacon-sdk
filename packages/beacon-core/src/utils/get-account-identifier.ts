@@ -20,7 +20,7 @@ export const getAccountIdentifier = async (address: string, network: Network): P
     data.push(`rpc:${network.rpcUrl}`)
   }
 
-  const buffer = Buffer.from(blake2b(encode(data.join('-')), undefined, 10))
+  const buffer = Buffer.from(blake2b(encode(data.join('-')), undefined, 16))
 
   return bs58check.encode(buffer)
 }

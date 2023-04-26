@@ -16,7 +16,7 @@ describe(`AccountIdentifier`, () => {
 
       const accountIdentifier: string = await getAccountIdentifier(address, network)
 
-      expect(accountIdentifier).to.deep.equal('yQxM85PrJ718CA1N6oz')
+      expect(accountIdentifier).to.deep.equal('2PcnkiqnqcQcq3Wko1yjDoqGjgL5')
     })
 
     it(`should return the account identifier for an address on delphinet`, async () => {
@@ -25,7 +25,7 @@ describe(`AccountIdentifier`, () => {
 
       const accountIdentifier: string = await getAccountIdentifier(address, network)
 
-      expect(accountIdentifier).to.deep.equal('2M1kGfFekH3G48Yxav3H')
+      expect(accountIdentifier).to.deep.equal('2xjLkeC8LfPm1b3s4rDM6P2miJcD')
     })
 
     it(`should return the account identifier for an address on custom net`, async () => {
@@ -38,7 +38,7 @@ describe(`AccountIdentifier`, () => {
 
       const accountIdentifier: string = await getAccountIdentifier(address, network)
 
-      expect(accountIdentifier).to.deep.equal('2BvmGNNovaYxXo879r6j')
+      expect(accountIdentifier).to.deep.equal('3GVG5Ggv21UMyD5qph2MCoHYtfFm')
     })
 
     it(`should return different account identifier for different network names`, async () => {
