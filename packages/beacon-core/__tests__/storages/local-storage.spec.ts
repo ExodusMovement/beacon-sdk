@@ -50,7 +50,7 @@ describe(`LocalStorage`, () => {
     await storage.set(StorageKey.BEACON_SDK_VERSION, testValue)
 
     expect(setSpy.firstCall.args[0]).to.deep.equal(StorageKey.BEACON_SDK_VERSION)
-    expect(setSpy.firstCall.args[1]).to.deep.equal(testValue)
+    expect(setSpy.firstCall.args[1]).to.deep.equal(JSON.stringify(testValue))
     expect(setSpy.callCount).to.equal(1)
   })
 
@@ -84,7 +84,7 @@ describe(`LocalStorage`, () => {
 
     const testValue = 'test-version1'
 
-    localStorage.setItem(StorageKey.BEACON_SDK_VERSION, testValue)
+    storage.set(StorageKey.BEACON_SDK_VERSION, testValue)
 
     const value = await storage.get(StorageKey.BEACON_SDK_VERSION)
 
@@ -105,9 +105,9 @@ describe(`LocalStorage`, () => {
     const testValue2 = 'test-version2'
     const testValueNoPrefix = 'test-version3'
 
-    localStorage.setItem(prefix1 + '-' + StorageKey.BEACON_SDK_VERSION, testValue1)
-    localStorage.setItem(prefix2 + '-' + StorageKey.BEACON_SDK_VERSION, testValue2)
-    localStorage.setItem(StorageKey.BEACON_SDK_VERSION, testValueNoPrefix)
+    storage1.set(StorageKey.BEACON_SDK_VERSION, testValue1)
+    storage2.set(StorageKey.BEACON_SDK_VERSION, testValue2)
+    storageNoPrefix.set(StorageKey.BEACON_SDK_VERSION, testValueNoPrefix)
 
     const value1 = await storage1.get(StorageKey.BEACON_SDK_VERSION)
     const value2 = await storage2.get(StorageKey.BEACON_SDK_VERSION)

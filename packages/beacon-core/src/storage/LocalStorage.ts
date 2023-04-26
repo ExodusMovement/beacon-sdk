@@ -20,20 +20,12 @@ export class LocalStorage implements Storage {
         return defaultValues[key]
       }
     } else {
-      try {
-        return JSON.parse(value)
-      } catch (jsonParseError) {
-        return value as StorageKeyReturnType[K] // TODO: Validate storage
-      }
+      return JSON.parse(value)
     }
   }
 
   public async set<K extends StorageKey>(key: K, value: StorageKeyReturnType[K]): Promise<void> {
-    if (typeof value === 'string') {
-      return localStorage.setItem(this.getPrefixedKey(key), value)
-    } else {
-      return localStorage.setItem(this.getPrefixedKey(key), JSON.stringify(value))
-    }
+    return localStorage.setItem(this.getPrefixedKey(key), JSON.stringify(value))
   }
 
   public async delete<K extends StorageKey>(key: K): Promise<void> {
