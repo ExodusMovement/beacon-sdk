@@ -99,7 +99,7 @@ export class MatrixClientStore {
   public async update(stateUpdate: Partial<MatrixStateUpdate>): Promise<void> {
     await this.waitReady()
 
-    const oldState = Object.assign({}, this.state)
+    const oldState = Object.assign(Object.create(null), this.state)
     this.setState(stateUpdate)
     this.updateStorage(stateUpdate)
 

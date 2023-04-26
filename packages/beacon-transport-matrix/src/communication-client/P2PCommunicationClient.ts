@@ -746,14 +746,13 @@ export class P2PCommunicationClient extends CommunicationClient {
 
   private async getRelevantRoom(recipient: string): Promise<string> {
     const roomIds = await this.storage.get(StorageKey.MATRIX_PEER_ROOM_IDS)
-    let roomId = roomIds[recipient]
+    let roomId = Object.prototype.hasOwnProperty.call(roomIds, recipient) ? roomIds[recipient] : undefined
 
     if (!roomId) {
       logger.log(`getRelevantRoom`, `No room found for peer ${recipient}, checking joined ones.`)
       const room = await this.getRelevantJoinedRoom(recipient)
       roomId = room.id
-      roomIds[recipient] = room.id
-      await this.storage.set(StorageKey.MATRIX_PEER_ROOM_IDS, roomIds)
+      await this.storage.set(StorageKey.MATRIX_PEER_ROOM_IDS, {...roomIds, [recipient]: room.id})
     }
 
     logger.log(`getRelevantRoom`, `Using room ${roomId}`)
