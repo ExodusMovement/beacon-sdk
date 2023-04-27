@@ -87,7 +87,7 @@ export class P2PCommunicationClient extends CommunicationClient {
     private readonly name: string,
     keyPair: KeyPair,
     public readonly replicationCount: number,
-    private readonly storage: Storage,
+    public readonly storage: Storage,
     matrixNodes?: NodeDistributions,
     private readonly iconUrl?: string,
     private readonly appUrl?: string
