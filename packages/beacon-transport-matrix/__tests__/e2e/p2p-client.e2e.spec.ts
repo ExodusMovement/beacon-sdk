@@ -22,7 +22,7 @@ describe(`P2PCommunicationClient e2e`, () => {
     client = new P2PCommunicationClient('Test', keypair, 2, localStorage, {})
   })
 
-  it.only(`should start`, async () => {
+  it(`should start`, async () => {
     await client.start()
     const matrixSelectedNode = await client.storage.get(StorageKey.MATRIX_SELECTED_NODE)
     const { server } = await client.getRelayServer()
