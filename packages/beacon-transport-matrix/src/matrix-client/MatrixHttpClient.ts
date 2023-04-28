@@ -90,6 +90,9 @@ export class MatrixHttpClient {
     const params = requestParams ? this.getParams(requestParams) : {}
 
     const query = new URLSearchParams(params)
+    if (!endpoint.startsWith('/')) {
+        throw new Error('endpoint must start with a slash')
+    }
     const url = new URL(`${this.apiUrl(CLIENT_API_R0)}${endpoint}`)
     if ([...query].length) {
       url.search = `?${query}`
