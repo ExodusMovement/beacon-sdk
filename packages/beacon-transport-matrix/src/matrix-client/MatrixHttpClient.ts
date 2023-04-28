@@ -90,10 +90,12 @@ export class MatrixHttpClient {
     const params = requestParams ? this.getParams(requestParams) : {}
 
     const query = new URLSearchParams(params)
-    const url = `${this.apiUrl(CLIENT_API_R0)}/${endpoint}?${query}`
+    const url = new URL(`${this.apiUrl(CLIENT_API_R0)}${endpoint}`)
+    if ([...query].length) {
+      url.search = `?${query}`
+    }
     const options: any = {
       method,
-      url,
       headers,
       body: undefined
     }
@@ -101,6 +103,7 @@ export class MatrixHttpClient {
       options.headers['Content-Type'] = 'application/json'
       options.body = JSON.stringify(data)
     }
+
     const response = await fetch(url, options)
     const json = await response.json()
 
