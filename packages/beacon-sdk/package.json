@@ -1,6 +1,6 @@
 {
   "name": "@exodus/airgap-beacon-sdk",
-  "version": "4.0.0-exodus.3",
+  "version": "4.0.0-exodus.4",
   "description": "> TODO: description",
   "author": "Andreas Gassmann <a.gassmann@papers.ch>",
   "homepage": "https://walletbeacon.io",
@@ -35,15 +35,15 @@
     "url": "https://github.com/airgap-it/beacon-sdk/issues"
   },
   "dependencies": {
-    "@exodus/airgap-beacon-blockchain-substrate": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-blockchain-tezos": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-core": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-dapp": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-transport-matrix": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-transport-postmessage": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-types": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-ui": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-utils": "4.0.0-exodus.3",
-    "@exodus/airgap-beacon-wallet": "4.0.0-exodus.3"
+    "@exodus/airgap-beacon-blockchain-substrate": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-blockchain-tezos": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-core": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-dapp": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-transport-matrix": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-transport-postmessage": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-types": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-ui": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-utils": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-wallet": "4.0.0-exodus.4"
   }
 }
