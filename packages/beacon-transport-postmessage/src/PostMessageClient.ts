@@ -125,7 +125,7 @@ export class PostMessageClient extends MessageBasedClient {
   }
 
   public async isChannelOpenMessage(message: any): Promise<boolean> {
-    return typeof message === 'object' && message.hasOwnProperty('payload')
+    return typeof message === 'object' && Object.prototype.hasOwnProperty.call(message, 'payload')
   }
 
   private async subscribeToMessages(): Promise<void> {
