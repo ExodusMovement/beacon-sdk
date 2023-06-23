@@ -13,7 +13,7 @@ export const getSenderId = async (publicKey: string): Promise<string> => {
   if (data.length !== 32) {
     throw new Error('getSenderId: invalid public key length')
   }
-  const buffer = Buffer.from(blake2b(data, undefined, 16))
+  const buffer = Buffer.from(blake2b(data, undefined, 5))
 
   return bs58check.encode(buffer)
 }
