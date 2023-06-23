@@ -1,6 +1,6 @@
 {
   "name": "@exodus/airgap-beacon-core",
-  "version": "4.0.0-exodus.4",
+  "version": "4.0.0-exodus.5",
   "description": "> TODO: description",
   "author": "Andreas Gassmann <a.gassmann@papers.ch>",
   "homepage": "https://walletbeacon.io",
