@@ -1,6 +1,6 @@
 {
   "name": "@exodus/airgap-beacon-ui",
-  "version": "4.0.0-exodus.4",
+  "version": "4.0.0-exodus.6",
   "description": "> TODO: description",
   "author": "Andreas Gassmann <a.gassmann@papers.ch>",
   "homepage": "https://walletbeacon.io",
@@ -30,10 +30,10 @@
     "url": "https://github.com/airgap-it/beacon-sdk/issues"
   },
   "dependencies": {
-    "@exodus/airgap-beacon-core": "4.0.0-exodus.4",
-    "@exodus/airgap-beacon-transport-postmessage": "4.0.0-exodus.4",
-    "@exodus/airgap-beacon-types": "4.0.0-exodus.4",
-    "@exodus/airgap-beacon-utils": "4.0.0-exodus.4",
+    "@exodus/airgap-beacon-core": "^4.0.0-exodus.4",
+    "@exodus/airgap-beacon-transport-postmessage": "^4.0.0-exodus.4",
+    "@exodus/airgap-beacon-types": "^4.0.0-exodus.4",
+    "@exodus/airgap-beacon-utils": "^4.0.0-exodus.4",
     "qrcode-svg": "^1.1.0",
     "solid-js": "^1.6.6"
   },
