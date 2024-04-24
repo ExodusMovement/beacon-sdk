@@ -11,6 +11,11 @@ jobs:
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Authenticate with private NPM package
+        # Note: NPM_TOKEN is a granular NPM token with access to the following packages
+        # @exodus/blakejs
+        # @exodus/libsodium-wrappers
+        # @exodus/react-native-crypto-shim
+        # @exodus/sodium-crypto
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Cache node modules
